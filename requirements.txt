@@ -1,0 +1,4 @@
+asgiref
+Django>=5.2,<5.3
+sqlparse
+tzdata
