@@ -7,7 +7,7 @@ class Post(models.Model):
     content = models.TextField()
     # image = models.ImageField()
     # category = models.ManyToManyField('Category', related_name='blog_posts')
-    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='blog_posts')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='blog_posts',null=True)
     # tags = models.ManyToManyField('Tag', related_name='blog_posts')
     counted_view = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
