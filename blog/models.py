@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Count
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -33,6 +35,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def excerpt(self):
+        return ' '.join(self.content.split()[:30]) + '...'
 
 
 # class Tag(models.Model):
