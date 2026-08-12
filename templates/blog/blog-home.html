@@ -94,7 +94,7 @@
                         <div class="col-lg-3  col-md-3 meta-details">
                             <ul class="tags">
                                 {% for category in post.category.all %}
-                                    <li><a href="#">{{ category }}</a></li>
+                                    <li><a href="#">{{ category }}</a> {% if not forloop.last %}, {% endif %} </li>
                                 {% endfor %}
 {#                                <li>{{ post.category.all | join:', ' }}</li>#}
                             </ul>

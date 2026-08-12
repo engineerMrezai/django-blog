@@ -36,7 +36,7 @@
                         </div>
                         <div class="details">
                             <a href="{% url 'blog:single' post.id %}"><h6>{{ post.title }}</h6></a>
-                            <p>{{ post.published_date }}</p>
+                            <p>{{ post.published_date|date:'D, d/m/Y' }}</p>
                         </div>
                     </div>
                 {% endfor %}
