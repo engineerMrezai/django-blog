@@ -7,10 +7,14 @@ from blog.models import Post, Category
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
-    list_display = ['title','author','counted_view','status','published_date','created_date', 'updated_date']
+    list_display = ['title','author','get_category','counted_view','status','published_date','created_date', 'updated_date']
     list_filter = ['status','created_date','author','category']
     # ordering = ['-created_date']
     search_fields = ['title','content']
+
+    @staticmethod
+    def get_category(obj):
+        return ', '.join([category.name for category in obj.category.all()])
 
 # admin.site.register(Post,PostAdmin)
 
