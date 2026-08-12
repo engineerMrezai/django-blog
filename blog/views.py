@@ -5,8 +5,10 @@ from django.db.models import Count, Q
 from blog.models import Post, Category
 
 
-def blog_view(request):
+def blog_view(request,name=None):
     posts = Post.objects.filter(status=1, published_date__lt=timezone.now())
+    if name:
+        posts = posts.filter(category__name=name)
     context = {'posts': posts}
     return render(request, 'blog/blog-home.html', context)
 

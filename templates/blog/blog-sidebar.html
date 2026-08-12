@@ -53,7 +53,7 @@
             <ul class="cat-list">
                 {% for cat in categories %}
                     <li>
-                        <a href="#" class="d-flex justify-content-between">
+                        <a href="{% url 'blog:category' cat.name %}" class="d-flex justify-content-between">
                             <p>{{ cat }}</p>
                             <p>{{ cat.post_count }}</p>
                         </a>

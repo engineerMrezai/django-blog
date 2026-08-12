@@ -18,7 +18,7 @@ def get_categories():
                     blog_posts__published_date__lt=timezone.now(),
                 )
             )
-        )
+        ).order_by('-post_count')
     )
 
 @register.simple_tag()
