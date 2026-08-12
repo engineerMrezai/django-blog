@@ -5,10 +5,12 @@ from django.db.models import Count, Q
 from blog.models import Post, Category
 
 
-def blog_view(request,name=None):
+def blog_view(request,cat_name=None,author_name=None):
     posts = Post.objects.filter(status=1, published_date__lt=timezone.now())
-    if name:
-        posts = posts.filter(category__name=name)
+    if cat_name:
+        posts = posts.filter(category__name=cat_name)
+    if author_name:
+        posts = posts.filter(author__username=author_name)
     context = {'posts': posts}
     return render(request, 'blog/blog-home.html', context)
 
