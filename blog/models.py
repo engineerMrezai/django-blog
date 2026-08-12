@@ -5,7 +5,7 @@ from django.conf import settings
 class Post(models.Model):
     title = models.CharField()
     content = models.TextField()
-    # image = models.ImageField()
+    image = models.ImageField(upload_to='blog/',default='blog/default.jpg')
     # category = models.ManyToManyField('Category', related_name='blog_posts')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='blog_posts',null=True)
     # tags = models.ManyToManyField('Tag', related_name='blog_posts')
