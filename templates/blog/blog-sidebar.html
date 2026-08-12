@@ -1,4 +1,7 @@
 {% load static %}
+{% load blog_tags %}
+{% get_categories as categories %}
+{% get_post_pop as post_pop %}
 <div class="col-lg-4 sidebar-widgets">
     <div class="widget-wrap">
         <div class="single-sidebar-widget search-widget">
@@ -31,7 +34,7 @@
             <div class="popular-post-list">
                 {% for post in post_pop %}
                     <div class="single-post-list d-flex flex-row align-items-center">
-                        <div class="thumb w-25">
+                        <div class="thumb">
                             <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
                         </div>
                         <div class="details">
