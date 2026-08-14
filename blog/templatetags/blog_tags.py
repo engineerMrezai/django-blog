@@ -1,6 +1,6 @@
 from django import template
 
-from blog.models import Category, Post
+from blog.models import Category, Post, Tag
 from django.db.models import Count, Q
 from django.utils import timezone
 
@@ -27,4 +27,8 @@ def get_post_pop():
 
 @register.simple_tag()
 def get_tags():
-    pass
+    return Tag.objects.all()
+
+@register.simple_tag()
+def get_last_posts(count=3):
+    return Post.objects.filter(status=1, published_date__lt=timezone.now()).order_by('-created_date')[:count]

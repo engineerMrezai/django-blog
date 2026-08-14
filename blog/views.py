@@ -6,12 +6,14 @@ from blog.models import Post, Category
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
-def blog_view(request,cat_name=None,author_name=None):
+def blog_view(request,cat_name=None,author_name=None,tag_name=None):
     posts = Post.objects.filter(status=1, published_date__lt=timezone.now())
     if cat_name:
         posts = posts.filter(category__name=cat_name)
     if author_name:
         posts = posts.filter(author__username=author_name)
+    if tag_name:
+        posts = posts.filter(tags__name=tag_name)
     if request.method == 'GET':
         if s := request.GET.get('search'):
             posts = posts.filter(

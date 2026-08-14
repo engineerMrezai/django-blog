@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models import Count
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -23,7 +24,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='blog/',default='blog/default.jpg')
     category = models.ManyToManyField(Category, related_name='blog_posts')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='blog_posts',null=True)
-    # tags = models.ManyToManyField('Tag', related_name='blog_posts')
+    tags = models.ManyToManyField('Tag', related_name='blog_posts')
     counted_view = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -40,10 +41,13 @@ class Post(models.Model):
         return ' '.join(self.content.split()[:30]) + '...'
 
 
-# class Tag(models.Model):
-#     name = models.CharField()
-#     created_date = models.DateTimeField()
-#     updated_date = models.DateTimeField()
-#
+class Tag(models.Model):
+    name = models.CharField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
 
 

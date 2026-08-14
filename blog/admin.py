@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post, Category
+from blog.models import Post, Category, Tag
 
 
 # Register your models here.
@@ -20,6 +20,14 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_date'
+    list_display = ['name','created_date','updated_date']
+    list_filter = ['created_date']
+    search_fields = ['name']
+    fields = ["name"]
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     list_display = ['name','created_date','updated_date']
     list_filter = ['created_date']
