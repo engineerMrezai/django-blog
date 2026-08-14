@@ -1,9 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.db.models import Count
-from django.utils import timezone
-from django.utils.text import slugify
-
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField()
@@ -40,6 +37,9 @@ class Post(models.Model):
     def excerpt(self):
         return ' '.join(self.content.split()[:30]) + '...'
 
+    def get_absolute_url(self):
+        url = reverse("blog:single", kwargs={"id": self.id})
+        return url
 
 class Tag(models.Model):
     name = models.CharField()
