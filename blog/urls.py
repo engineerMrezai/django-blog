@@ -7,5 +7,5 @@ urlpatterns = [
     path('',blog_view,name='index'),
     path('<int:id>',blog_single,name='single'),
     path('category/<str:cat_name>',blog_view,name='category'),
-    path('author/<str:author_name>',blog_view,name='author')
+    path('author/<str:author_name>',blog_view,name='author'),
 ]

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.db.models import Count, Q
 
 from blog.models import Post, Category
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def blog_view(request,cat_name=None,author_name=None):
@@ -11,6 +12,14 @@ def blog_view(request,cat_name=None,author_name=None):
         posts = posts.filter(category__name=cat_name)
     if author_name:
         posts = posts.filter(author__username=author_name)
+    if request.method == 'GET':
+        if s := request.GET.get('search'):
+            posts = posts.filter(
+                Q(title__icontains=s) | Q(content__icontains=s)
+            ).distinct()
+    pages = Paginator(posts, 3)
+    page_number = request.GET.get('page') or 1
+    posts = pages.get_page(page_number)
     context = {'posts': posts}
     return render(request, 'blog/blog-home.html', context)
 
