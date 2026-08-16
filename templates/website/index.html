@@ -187,7 +187,7 @@
                 <div class="menu-content pb-60 col-lg-9">
                     <div class="title text-center">
                         <h1 class="mb-10">Latest from Our Blog</h1>
-                                        {{ latest_posts }}
+                        {{ latest_posts }}
                         <p>With the exception of Nietzsche, no other madman has contributed so much to human sanity as
                             has.</p>
                     </div>
@@ -212,8 +212,7 @@
                                 </div>
                                 <a href="{% url 'blog:single' post.id %}"><h4 class="title">{{ post.title }}</h4></a>
                                 <p>
-                                  {{ post.content|truncatewords:30 }}
-                                </p>
+                                    {{ post.content|striptags|truncatewords:30 }}                                </p>
                                 <h6 class="date">{{ post.published_date|date:"j M,Y" }}</h6>
 
                             </div>

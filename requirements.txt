@@ -4,3 +4,7 @@ sqlparse
 tzdata
 pillow
 django-extensions
+django-robots
+django-debug-toolbar
+django-summernote
+

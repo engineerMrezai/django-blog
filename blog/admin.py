@@ -1,18 +1,18 @@
 from django.contrib import admin
 from blog.models import Post, Category, Tag
-from django.urls import reverse
-
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
     view_on_site = True
     date_hierarchy = 'created_date'
     list_display = ['title','author','get_category','counted_view','status','published_date','created_date', 'updated_date']
     list_filter = ['status','created_date','author','category']
     # ordering = ['-created_date']
     search_fields = ['title','content']
+    summernote_fields = ('content',)
 
     @staticmethod
     def get_category(obj):
